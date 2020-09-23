@@ -40,6 +40,10 @@ export enum SortKey {
     User = 'userId'
 };
 
+export type UserSortKey = SortKey.AverageTime | SortKey.User;
+
+export type CountrySortKey = SortKey.AverageTime | SortKey.CountryCode;
+
 export enum Separator {
     ColumnSeparator = ' '
 };

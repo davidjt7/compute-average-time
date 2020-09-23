@@ -1,6 +1,7 @@
-import { computeAverageTime } from '.';
+import { analyzeTasks } from '.';
+import { SortKey } from './types';
 
-computeAverageTime(`6
+const result: string = analyzeTasks(`6
 1 IN
 2 US
 3 BZ
@@ -15,4 +16,6 @@ computeAverageTime(`6
 5 2 9
 6 3 12
 7 4 10
-8 4 11`);
+8 4 11`, SortKey.AverageTime, SortKey.CountryCode);
+
+console.log(result);

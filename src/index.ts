@@ -8,29 +8,39 @@ import {
   Sortable,
   SortKey,
   Separator,
+  UserSortKey,
+  CountrySortKey
 } from './types';
+import { EOL } from 'os';
 
-export const computeAverageTime = (input) => {
+export const analyzeTasks = (input: string, userSortKey: UserSortKey, countrySortKey: CountrySortKey) => {
   const inputString = inputStringToTuple(input);
   const inputJSON = formatInput(inputString);
   const { users, tasks } = inputJSON;
 
   const userAverages = initUserAverages(users);
-  computeUserAverages(userAverages, users, tasks, SortKey.AverageTime);
-  console.table(userAverages);
+  computeUserAverages(userAverages, users, tasks, userSortKey);
 
   const countryAverages = initCountryAverages(users);
-  computeCountryAverages(countryAverages, users, tasks, SortKey.AverageTime);
-  console.table(countryAverages);
+  computeCountryAverages(countryAverages, users, tasks, countrySortKey);
+
+  let outputString = '';
+  for (const userAverage of userAverages) {
+    outputString += `${userAverage.userId} ${userAverage.averageTime}${EOL}`;
+  }
+  for (const countryAverage of countryAverages) {
+    outputString += `${countryAverage.countryCode} ${countryAverage.averageTime}${EOL}`;
+  }
+  return outputString.slice(0, -1);
 };
 
 const inputStringToTuple = (input: string) => input.split(/\r?\n/);
 
 const formatInput = (input: string[]) => {
   const userCount = +input[0];
-  const taskCount = +input[userCount+1];
+  const taskCount = +input[userCount + 1];
   const users = input.slice(1, userCount + 1);
-  const tasks = taskCount? input.slice(userCount + 2, taskCount+userCount+2): input.slice(userCount + 2);
+  const tasks = taskCount ? input.slice(userCount + 2, taskCount + userCount + 2) : input.slice(userCount + 2);
 
   const userJSONArray: User[] = [];
   for (const user of users) {
