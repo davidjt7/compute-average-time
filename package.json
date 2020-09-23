@@ -2,7 +2,7 @@
   "name": "compute-average-time",
   "version": "1.0.0",
   "description": "Calculates the average time spent executing tasks, broken down by user and by country.",
-  "main": "index.js",
+  "main": "build/index.js",
   "author": "David Joseph Thomas",
   "license": "ISC",
   "repository": {
