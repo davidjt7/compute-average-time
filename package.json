@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Calculates the average time spent executing tasks, broken down by user and by country.",
   "main": "build/index.js",
+  "types": "src/index.d.ts",
   "author": "David Joseph Thomas",
   "license": "ISC",
   "repository": {

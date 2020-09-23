@@ -13,16 +13,16 @@ import {
 } from './types';
 import { EOL } from 'os';
 
-export const analyzeTasks = (input: string, userSortKey: UserSortKey, countrySortKey: CountrySortKey) => {
+export const analyzeTasks = (input: string, userSortKey?: UserSortKey, countrySortKey?: CountrySortKey) => {
   const inputString = inputStringToTuple(input);
   const inputJSON = formatInput(inputString);
   const { users, tasks } = inputJSON;
 
   const userAverages = initUserAverages(users);
-  computeUserAverages(userAverages, users, tasks, userSortKey);
+  computeUserAverages(userAverages, users, tasks, userSortKey || SortKey.AverageTime);
 
   const countryAverages = initCountryAverages(users);
-  computeCountryAverages(countryAverages, users, tasks, countrySortKey);
+  computeCountryAverages(countryAverages, users, tasks, countrySortKey || SortKey.AverageTime);
 
   let outputString = '';
   for (const userAverage of userAverages) {
